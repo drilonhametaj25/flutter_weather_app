@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/weather_forecast.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
@@ -82,7 +83,7 @@ class WeatherScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            SingleChildScrollView(
+            const SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
@@ -94,47 +95,40 @@ class WeatherScreen extends StatelessWidget {
                   HourlyForecastItem(),
                 ],
               ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Additional Information',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Row(
+              children: [
+                Column(
+                  children: [
+                    Icon(
+                      Icons.water_drop,
+                      size: 32,
+                    ),
+                    SizedBox(height: 8),
+                    Text('Humidity'),
+                    SizedBox(height: 8),
+                    Text(
+                      '91',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                )
+              ],
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class HourlyForecastItem extends StatelessWidget {
-  const HourlyForecastItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 6,
-      child: Container(
-        width: 100,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.all(8.0),
-        child: const Column(children: [
-          Text(
-            '03:00',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Icon(
-            Icons.cloud,
-            size: 32,
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            '34.127',
-          ),
-        ]),
       ),
     );
   }
