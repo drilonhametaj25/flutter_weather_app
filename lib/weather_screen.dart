@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,13 +6,32 @@ import 'package:weather_app/additiona_info_item.dart';
 import 'package:weather_app/weather_forecast.dart';
 import 'package:http/http.dart' as http;
 
-class WeatherScreen extends StatelessWidget {
+class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
 
+  @override
+  State<WeatherScreen> createState() => _WeatherScreenState();
+}
+
+class _WeatherScreenState extends State<WeatherScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getCurrentWeather();
+  }
+
   Future getCurrentWeather() async {
-    final res = await http.get(
-      Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=Siena'),
-    );
+    try {
+      final res = await http.get(
+        Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=Siena'),
+      );
+      final data = jsonDecode(res.body);
+      if (int.parse(data['cod']) != 200) {
+        throw 'An unexpected error occurred';
+      }
+    } catch (e) {
+      throw e.toString();
+    }
   }
 
   @override
