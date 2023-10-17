@@ -3,9 +3,16 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:weather_app/additiona_info_item.dart';
 import 'package:weather_app/weather_forecast.dart';
+import 'package:http/http.dart' as http;
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
+
+  Future getCurrentWeather() async {
+    final res = await http.get(
+      Uri.parse('https://api.openweathermap.org/data/2.5/weather?q=Siena'),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
